@@ -9,6 +9,6 @@ La tabella mostra il valore ottenuto del Pi.
 ![Valori_calcolati](Immagini/Valori.png)
 
 #### Tempi di esecuzione.
-La tabella mostra il tempo di esecuzione.
+La tabella mostra il tempo di esecuzione misurato in secondi.
 
-![Tempi_esecuzione](Immagini/Tempi di esecuzione.png)
+![Tempi_esecuzione](Immagini/TempoEsecuzione.png)
