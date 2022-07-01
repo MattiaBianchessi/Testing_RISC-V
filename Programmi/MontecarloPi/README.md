@@ -11,4 +11,4 @@ La tabella mostra il valore ottenuto del Pi.
 #### Tempi di esecuzione.
 La tabella mostra il tempo di esecuzione.
 
-![Tempi_esecuzione](Immagini/ Tempi_di_esecuzione.png)
+![Tempi_esecuzione](Immagini/Tempi di esecuzione.png)
