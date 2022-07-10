@@ -171,13 +171,13 @@ int main(int argc, char *argv[])
     {
         clock_t end = clock();
         print_sudoku(m);
-        printf("\n\nSoluzione trovata in : %f", ((double)(end - start)) / CLOCKS_PER_SEC);
+        printf("\n\nSoluzione trovata in : %f\n", ((double)(end - start)) / CLOCKS_PER_SEC);
     }
     else
     { 
         clock_t end = clock();
        
-        printf("\n\nNo soluzione in : %f", ((double)(end - start)) / CLOCKS_PER_SEC);
+        printf("\n\nNo soluzione in : %f\n", ((double)(end - start)) / CLOCKS_PER_SEC);
     }
     return 0;
     
