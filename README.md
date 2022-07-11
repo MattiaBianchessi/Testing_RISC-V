@@ -6,3 +6,4 @@
 - dati montecarlo Pi
 - dati Operazioni
 - sistemare ratMaze
+- CONFRONTO CON I DATI
