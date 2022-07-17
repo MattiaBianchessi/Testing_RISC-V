@@ -17,38 +17,21 @@ typedef struct
 GENERA MATRICI
 -------------*/
 //Genera una matrice casuale di dimensione dim x dim. Ogni elemento generato varia tra 1 e range
-int **genMatriceRnd(int dim,int range)
+void genMatriceRnd(int dim,int range, int m[dim][dim])
 {
-    int **a;
-    a = (int **)malloc(dim * sizeof(int *));
-    for (int i = 0; i < dim; i++)
-    {
-        a[i] = malloc(dim * sizeof(int));
-    }
-
+ 
    for (int i = 0; i < dim; i++)
     {
         for (int j = 0; j < dim; j++)
         {
             int num = (rand() % range) + 1;
-            a[i][j] = num;
+            m[i][j] = num;
             
         }
     }
-    return a;
+    
 }
 
-// Genera una matrice casuale di dimensione dim x dim. Ogni elemento generato è zero
-int **genMatrice(int dim)
-{
-    int **a;
-    a = (int **)malloc(dim * sizeof(int *));
-    for (int i = 0; i < dim; i++)
-    {
-        a[i] = malloc(dim * sizeof(int));
-    }
-    return a;
-}
 
 /*---------
 OPERAZIONI:
@@ -57,7 +40,8 @@ OPERAZIONI:
 ----------*/
 
 //SOMMA
-void sumMatrice(int dim, int **a, int **b){
+void sumMatrice(int dim, int a[dim][dim], int b[dim][dim])
+{
     for(int i = 0; i < dim; i ++){
         for(int j = 0 ;j < dim ; j++){
             //c[i][j] = a[i][j] + b[i][j];
@@ -67,7 +51,7 @@ void sumMatrice(int dim, int **a, int **b){
 }
 
 //SOTTRAZIONE
-void subMatrice(int dim, int **a, int **b)
+void subMatrice(int dim, int a[dim][dim], int b[dim][dim])
 {
     for (int i = 0; i < dim; i++)
     {
@@ -80,7 +64,7 @@ void subMatrice(int dim, int **a, int **b)
 }
 
 //PRODOTTO
-void multMatrice(int dim, int **a, int **b)
+void multMatrice(int dim, int a[dim][dim], int b[dim][dim])
 {
     for (int i = 0; i < dim; i++)
     {
@@ -93,7 +77,7 @@ void multMatrice(int dim, int **a, int **b)
 }
 
 //DIVISIONE
-void divMatrice(int dim, int **a, int **b)
+void divMatrice(int dim, int a[dim][dim], int b[dim][dim])
 {
     for (int i = 0; i < dim; i++)
     {
@@ -106,19 +90,23 @@ void divMatrice(int dim, int **a, int **b)
 }
 
 //MODULO
-void modMatrice(int dim, int **a, int **b)
+void modMatrice(int dim, int a[dim][dim], int b[dim][dim])
 {
     for (int i = 0; i < dim; i++)
     {
         for (int j = 0; j < dim; j++)
         {
            // c[i][j] = a[i][j] % b[i][j];
-           a[i][j] % b[i][j];
+            a[i][j] % b[i][j];
         }
     }
 }
 
+int a[15000][15000];
+int b[15000][15000];
+
 int main(){
+
     // Dimensioni possibili
     const int dimensioni[] = {1000, 2500, 5000, 8000, 10000, 15000};
     const int DIMLEN = 6;           // dimensione ^
@@ -137,24 +125,23 @@ int main(){
     
     //counter
     int completi = 0;
-
     int dim;
-    int** a;
-    int** b;
     
 
     // Tempi di esecuzione
     for (int i = 0; i < DIMLEN; i++)
-    {
+    {        
+        dim = dimensioni[i];
         for (int j = 0; j < PROVE; j++)
         {
-            dim = dimensioni[i];
+            
             // Matrice A
-            a = genMatriceRnd(dim, range[0]);
+            genMatriceRnd(dim, 20, a);
 
             // Matrice B
-            b = genMatriceRnd(dim, range[1]);
+            genMatriceRnd(dim, 10, b);
 
+            
             // Matrice C
             //int **c = genMatrice(dim);
 
@@ -163,6 +150,7 @@ int main(){
             sumMatrice(dim, a, b);
             end = clock();
             operazioni[i][j].somma = ((double)(end - start)) / CLOCKS_PER_SEC;
+
 
             // DIFFERENZA
             start = clock();
@@ -191,8 +179,6 @@ int main(){
             // COMUNICAZIONE
             printf("%d/%d Completati\n", ++completi , DIMLEN * PROVE);
 
-            free(a);
-            free(b);
             }
             
         }
