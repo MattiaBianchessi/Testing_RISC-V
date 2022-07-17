@@ -52,45 +52,45 @@ OPERAZIONI
 
 
 //Esegue la moltiplicazione posizione per posizione tra a e b e memorizza il risultato in un array
-int* eseguiMult(int *a, int *b){
-    int *res = malloc(N * sizeof(int));
+void eseguiMult(int *a, int *b, int* res){
+    //int *res = malloc(N * sizeof(int));
     for(int i = 0; i < N; i++){
         res[i] = a[i] * b[i];
     }
-    return res;
+    //return res;
 }
 
 // Esegue la divisione posizione per posizione tra a e b e memorizza il risultato in un array
-int* eseguiDiv(int *a, int *b)
+void eseguiDiv(int *a, int *b, int* res)
 {
-    int *res = malloc(N * sizeof(int));
+   // int *res = malloc(N * sizeof(int));
     for (int i = 0; i < N; i++)
     {
         res[i] = a[i] / b[i];
     }
-    return res;
+    //return res;
 }
 
 // Esegue la moltiplicazione tramite shift posizione per posizione tra a e b e memorizza il risultato in un array
-int* eseguiMultShift(int *a, int *b)
+void eseguiMultShift(int *a, int *b, int* res)
 {
-    int *res = malloc(N * sizeof(int));
+    //int *res = malloc(N * sizeof(int));
     for (int i = 0; i < N; i++)
     {
         res[i] = a[i] << b[i];
     }
-    return res;
+    //return res;
 }
 
 // Esegue la divisione tramite shift posizione per posizione tra a e b e memorizza il risultato in un array
-int* eseguiDivShift(int *a, int *b)
+void eseguiDivShift(int *a, int *b, int* res)
 {
-    int *res = malloc(N * sizeof(int));
+    //int *res = malloc(N * sizeof(int));
     for (int i = 0; i < N; i++)
     {
         res[i] = a[i] >> b[i];
     }
-    return res;
+    //return res;
 }
 
 
@@ -114,72 +114,74 @@ int main(){
     int *exp;
 
     //Risultati
-    int *resmult, *resmultShift;
-    int *resdiv, *resdivShift;
+    int resmult[N];
+    int resmultShift[N];
+    int resdiv[N];
+    int resdivShift[N];
 
     srand(time(NULL));
     clock_t start ,end;
 
     double tempiMult[N][2];
     double tempiDiv[N][2];
+    
 
-   
-        for(int j = 0; j < N ; j++){
-            //Genera i numeri
-            numeri = generaNumeri();
-            valori = generaMult();
-            exp = esponenti(valori);
+        for (int j = 0; j < N; j++)
+    {
+        // Genera i numeri
+        numeri = generaNumeri();
+        valori = generaMult();
+        exp = esponenti(valori);
 
-            //Moltiplicazione
-            start = clock();
-            resmult = eseguiMult(numeri, valori);
-            end = clock();
+        // Moltiplicazione
+        start = clock();
+        eseguiMult(numeri, valori, resmult);
+        end = clock();
 
-            tempiMult[j][0] = ((double)(end - start)) / CLOCKS_PER_SEC;
+        tempiMult[j][0] = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-            //Divisione
-            start = clock();
-            resdiv = eseguiDiv(numeri, valori);
-            end = clock();
+        // Divisione
+        start = clock();
+        eseguiDiv(numeri, valori, resdiv);
+        end = clock();
 
-            tempiDiv[j][0] = ((double)(end - start)) / CLOCKS_PER_SEC;
+        tempiDiv[j][0] = ((double)(end - start)) / CLOCKS_PER_SEC;
 
+        // shift moltiplicazione
+        start = clock();
+        eseguiMultShift(numeri, exp, resmultShift);
+        end = clock();
 
-            //shift moltiplicazione
-            start = clock();
-            resmultShift = eseguiMultShift(numeri, exp);
-            end = clock();
+        tempiMult[j][1] = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-            tempiMult[j][1] = ((double)(end - start)) / CLOCKS_PER_SEC;
+        // shift divisione
+        start = clock();
+        eseguiDivShift(numeri, exp, resdivShift);
+        end = clock();
 
-            //shift divisione
-            start = clock();
-            resdivShift = eseguiDivShift(numeri, exp);
-            end = clock();
+        tempiDiv[j][1] = ((double)(end - start)) / CLOCKS_PER_SEC;
 
-            tempiDiv[j][1] = ((double)(end - start)) / CLOCKS_PER_SEC;
+        if (controllo(resmult, resmultShift) == -1)
+        {
+            printf("ERRORE");
+            return -1;
+        }
 
-            if (controllo(resmult, resmultShift) == -1){
-                printf("ERRORE");
-                return -1;
-            }
-
-            if (controllo(resdiv, resdivShift) == -1)
-            {
-                printf("ERRORE");
-                return -1;
-            }
-
-            free(resmult);
-            free(resmultShift);
-            free(resdiv);
-            free(resdivShift);
-            free(numeri);
-            free(valori);
-        
+        if (controllo(resdiv, resdivShift) == -1)
+        {
+            printf("ERRORE");
+            return -1;
+        }
+/*
+        free(resmult);
+        free(resmultShift);
+        free(resdiv);
+        free(resdivShift);
+        free(numeri);
+        free(valori);
+        */
     }
 
-    
     //tempi [moltiplicazione / divisione] [normale / shift]
     double tempi[2][2];
 
@@ -192,7 +194,7 @@ int main(){
             tempi[1][1]+= tempiDiv[j][1];
         
     }
-    printf(" %f \n", tempi[0][0]);
+    //printf(" %f \n", tempi[0][0]);
     printf("\t  Mult\t | Div\nNormale:%.4fms | %.4fms\nShift:\t%.4fms | %.4fms\n",
            (tempi[0][0]/ N) * 1000,
            (tempi[1][0]/ N) * 1000,

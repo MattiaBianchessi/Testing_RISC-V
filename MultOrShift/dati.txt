@@ -1,0 +1,13 @@
+PC
+          Mult  ;Div
+Normale:0.0036ms;0.0042ms
+Shift:  0.0034ms;0.0034ms
+Operazioni: 1000
+
+RISC-V
+
+0.043039 
+          Mult  ;Div
+Normale:0.0430ms;0.0572ms
+Shift:  0.0404ms;0.0826ms
+Operazioni: 1000
