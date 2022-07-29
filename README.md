@@ -8,7 +8,7 @@
 
 
 ## Backtracking
-Nella directory sono contenuti due programmi che utilizzano tecniche di backtracking. I due programmi sono un risolutore di sudoku e un risolutore di labirinti. È possibilie utilizzare un proprio sudoku o un prorpio labirinto per utilizzare input differenti da quelli utilizzati per eseguire dei test.
+Nella directory sono contenuti due programmi che utilizzano tecniche di backtracking. I due programmi sono un risolutore di sudoku e un risolutore di labirinti. È possibilie utilizzare un proprio labirinto per utilizzare input differenti da quelli utilizzati per eseguire dei test.
 
 ## MonteCarloPi
 La direcory contiene un programma che calcola il Pi greco utilizzando la tecnica di motecarlo
