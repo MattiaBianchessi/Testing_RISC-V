@@ -2,7 +2,6 @@
 
 
 ### TO DO
-- dati del risolutore di sudoku
 - CONFRONTO CON I DATI
 
 
