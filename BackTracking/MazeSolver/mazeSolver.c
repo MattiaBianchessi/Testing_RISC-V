@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <time.h>
 
+/* Coordinata */
 typedef struct
 {
     int x, y;
@@ -29,7 +30,7 @@ Coordinate puntoInizio(char **m, int l, int c)
         }
     }
    }
-    return entrance; /* did not find an entrance */
+    return entrance; 
 }
 
 //Confronto coordinate
@@ -114,7 +115,7 @@ void possibile(Coordinate curr, char **maze, Coordinate *dirPoss,
 char stop_program()
 {
     char answer;
-    printf("\nWould you like to stop the program? (Y/N)\n");
+    printf("\nTerminare il programma? (Y/N)\n");
     scanf(" %c", &answer);
     return toupper(answer);
 }
