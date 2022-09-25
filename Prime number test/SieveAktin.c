@@ -1,5 +1,4 @@
-// C++ program for implementation
-// of Sieve of Atkin
+// Atkin's Sieve
 #include <stdio.h>
 #include <stdbool.h>
 
@@ -8,7 +7,7 @@
 // till limit using Sieve of Atkin
 void SieveOfAtkin(int limit)
 {
-    // Initialise the sieve array
+    // Init the sieve array
     // with initial false values
     bool sieve[limit];
     for (int i = 0; i <= limit; i++)
@@ -20,17 +19,7 @@ void SieveOfAtkin(int limit)
     if (limit > 3)
         sieve[3] = true;
 
-    /* Mark sieve[n] is true if one
-    of the following is true:
-    a) n = (4*x*x)+(y*y) has odd number of
-    solutions, i.e., there exist
-    odd number of distinct pairs (x, y)
-    that satisfy the equation and
-        n % 12 = 1 or n % 12 = 5.
-    b) n = (3*x*x)+(y*y) has odd number of
-    solutions and n % 12 = 7
-    c) n = (3*x*x)-(y*y) has odd number of
-    solutions, x > y and n % 12 = 11 */
+    
     for (int x = 1; x * x <= limit; x++)
     {
         for (int y = 1; y * y <= limit; y++)
@@ -64,15 +53,13 @@ void SieveOfAtkin(int limit)
         }
     }
 
-    // Print primes using sieve[]
     for (int a = 1; a <= limit; a++)
         if (sieve[a])
             printf("%d, ", a);
-            
-    
+                
 }
 
-// Driver program
+// Main 
 int main(void)
 {
     int limit = 20;
